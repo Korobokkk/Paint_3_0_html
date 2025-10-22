@@ -14,12 +14,31 @@
     </div>
 
     <button onclick ="paletteVisibility()">Выбор цвета</button>
-
+	<button onclick="clearCanvas()">Новый лист</button>
+    <button onclick="eraser()">Ластик</button>
+    
     <div id="palette" style="display: none;">
-      <button onclick="selectColor('#000000')">Черный </button>
-      <button onclick="selectColor('#ff0000')">Красный </button>
+		<button onclick="selectColor('#000000')">Черный</button>
+		<button onclick="selectColor('#ff0000')">Красный </button>
+		<button onclick="selectColor('#008000')">Зеленый</button>
+		<button onclick="selectColor('#0000ff')">Синий</button>
+		<button onclick="selectColor('#ffff00')">Желтый</button>
+		<button onclick="selectColor('#ff6f00')">Оранжевый</button>
+		<button onclick="selectColor('#8b00ff')">Фиолетовый</button>
+		<button onclick="selectColor('#808080')">Серый</button>
+		<button onclick="selectColor('#ff0099')">Розовый</button>
+		<button onclick="selectColor('#00ffff')">Голубой</button>
     </div> 
-
+	
+	<div id ="size" style= "display: none;">
+	<button onclick= "selectSize(5)">5</button>
+	<button onclick= "selectSize(10)">10</button>
+	<button onclick= "selectSize(20)">20</button>	
+	<button onclick= "selectSize(30)">30</button>
+	<button onclick= "selectSize(50)">50</button>
+	<button onclick= "selectSize(100)">100</button>
+	</div>
+	
     <div style="height: 20px;"></div> 
     
     <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; ">
@@ -45,6 +64,7 @@
           palette.style.display = 'none';
         }
       }
+      
       function selectColor(color){
         const canvas= document.getElementById('canvas');
         const context= canvas.getContext('2d');
@@ -52,6 +72,28 @@
         paletteVisibility();
         }
       
+      function clearCanvas(){
+        const canvas= document.getElementById('canvas');
+        const context= canvas.getContext('2d');
+        context.clearRect(0,0,canvas.width, canvas.height);
+      }
+	  function eraser(){
+		const  size= document.getElementById('size');
+		if(size.style.display==='none')
+		{
+			size.style.display='block';
+		}
+		else{
+			size.style.display='none';
+		}
+	  }
+	  function selectSize(lineWidth){
+		const canvas= document.getElementById('canvas');
+        const context= canvas.getContext('2d');
+		context.strokeStyle='#ffffff';
+		context.lineWidth =lineWidth;
+        eraser();
+	  }
 
       function work_with_canvas(){
         const element= document.getElementById('canvas');
