@@ -7,12 +7,22 @@
 
   <body>
     <h1>Рисовашки</h1>
-    <p>Здесь вы можете рисовать <strong>всё</strong> что угодно!</p>
+    <p>Здесь вы можете нарисовать <strong>всё</strong> что угодно!</p>
     <p onclick="text_display('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
     <div id="help" style="display: none">
       <p>HELP Текст</p>
     </div>
-    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black;">
+
+    <button onclick ="paletteVisibility()">Выбор цвета</button>
+
+    <div id="palette" style="display: none;">
+      <button onclick="selectColor('#000000')">Черный </button>
+      <button onclick="selectColor('#ff0000')">Красный </button>
+    </div> 
+
+    <div style="height: 20px;"></div> 
+    
+    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; ">
       Версия вашего браузера устарела. Загрузка canvas невозможна
     </canvas>
     <script>
@@ -25,20 +35,42 @@
         }
       }
 
+      function paletteVisibility()
+      {
+        const palette = document.getElementById('palette');
+        if (palette.style.display==='none'){
+          palette.style.display = 'block';
+        }
+        else{
+          palette.style.display = 'none';
+        }
+      }
+      function selectColor(color){
+        const canvas= document.getElementById('canvas');
+        const context= canvas.getContext('2d');
+        context.strokeStyle= color;
+        paletteVisibility();
+        }
+      
+
       function work_with_canvas(){
         const element= document.getElementById('canvas');
         const context= element.getContext('2d');
         
-        let value_configuration=
+        let valueConfiguration=
         {
           color: '#000000',
           lineWidth: 3
         };
+        
+        //function setValueCanvasLineWidth(newLineWidth){
+          //valueConfiguration.lineWidth= newLineWidth;
+        //}
 
-        context.strokeStyle = value_configuration.color;
-        context.lineWidth = value_configuration.lineWidth;
+        context.strokeStyle = valueConfiguration.color;
+        context.lineWidth = valueConfiguration.lineWidth;
 
-        let check_painting=
+        let checkPainting=
         {
           isActive: false,
           startX: 0,
@@ -46,20 +78,20 @@
         };
         function handleMouseDown(event)
         {
-          check_painting.isActive= true;
-          check_painting.startX= event.offsetX;
-          check_painting.startY= event.offsetY;
+          checkPainting.isActive= true;
+          checkPainting.startX= event.offsetX;
+          checkPainting.startY= event.offsetY;
         }
         function handleMouseUp(event)
         {
-          if(!check_painting.isActive)
+          if(!checkPainting.isActive)
           {
             return;
           }
           let endX= event.offsetX;
           let endY= event.offsetY;
-          drawLine(context, check_painting.startX, check_painting.startY, endX, endY);
-          check_painting.isActive= false;
+          drawLine(context, checkPainting.startX, checkPainting.startY, endX, endY);
+          checkPainting.isActive= false;
         }
 
         function drawLine(context, startX, startY, endX, endY)
