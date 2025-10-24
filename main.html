@@ -3,186 +3,72 @@
   <head>
     <meta charset="uft-8" />
     <title>Рисовашки</title>
-    <style> 
-      body{
-        background-color: #ffffcc;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">;
   </head>
 
   <body>
-    <h1 style= "font-size: 70px; text-align: center;">Рисовашки</h1>
-    <p style= "font-size: 30px; text-align: center;">Здесь вы можете нарисовать <strong>всё</strong> что угодно!</p>
-    <p style= "font-size: 25px; text-align: center;" onclick="hideBlock('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
-    <div id="help" style="display: none">
-	  <p style= "font-size: 20px; text-align: center;">Вы можете рисовать <strong>разными цветами</strong>, <strong>менять размер кисти</strong>, а также <strong>сохранять изображение</strong>, для этого достаточно нажать на кнопку с соответствующим названием.</p> 
-      <p style= "font-size: 20px; text-align: center;"><strong>Если поле для рисования слишком большое и не помещается в экран</strong>- рекомендуется использовать масштабирование страницы</p>
-    </div>
+    <h1>Рисовашки</h1>
+	
+	<div class="center-style">
+		<p  style= "font-size: 35px;">Здесь вы можете нарисовать <strong>всё</strong> что угодно!</p>
+		<p  style= "font-size: 25px;" onclick="hideBlock('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
+		<div id="help" style="display: none;">
+		  <p style= "font-size: 20px;">Вы можете рисовать <strong>разными цветами</strong>, <strong>менять размер кисти</strong>, а также <strong>сохранять изображение</strong>, для этого достаточно нажать на кнопку с соответствующим названием.</p> 
+		  <p style= "font-size: 20px;"><strong>Если поле для рисования слишком большое и не помещается в экран</strong>- рекомендуется использовать масштабирование страницы</p>
+		</div>
+		
+		
+		<button onclick ="hideBlock('palette')">Выбор цвета</button>
+		<button onclick ="hideBlock('size')">Размер</button>
+		<button onclick="clearCanvas()">Новый лист</button>
+		<button onclick="eraser()">Ластик</button>
+	
+		<div id="palette" style="display: none;">
+			<button onclick="selectColor('#000000')">Черный</button>
+			<button onclick="selectColor('#ff0000')">Красный </button>
+			<button onclick="selectColor('#008000')">Зеленый</button>
+			<button onclick="selectColor('#0000ff')">Синий</button>
+			<button onclick="selectColor('#ffff00')">Желтый</button>
+			<button onclick="selectColor('#ff6f00')">Оранжевый</button>
+			<button onclick="selectColor('#8b00ff')">Фиолетовый</button>
+			<button onclick="selectColor('#808080')">Серый</button>
+			<button onclick="selectColor('#ff0099')">Розовый</button>
+			<button onclick="selectColor('#00ffff')">Голубой</button>
+			<button onclick="selectColor('#ffffff')">Белый</button>
+		</div> 
+	
+		<div id ="size" style="display: none;">
+		<button onclick= "selectSize(3)">3</button>
+		<button onclick= "selectSize(5)">5</button>
+		<button onclick= "selectSize(10)">10</button>
+		<button onclick= "selectSize(20)">20</button>	
+		<button onclick= "selectSize(30)">30</button>
+		<button onclick= "selectSize(50)">50</button>
+		<button onclick= "selectSize(100)">100</button>
+		</div>	
 
-	<div style= "text-align: center;">
-    <button onclick ="hideBlock('palette')">Выбор цвета</button>
-	<button onclick ="hideBlock('size')">Размер</button>
-	<button onclick="clearCanvas()">Новый лист</button>
-    <button onclick="eraser()">Ластик</button>
-    </div>
-	
-    <div id="palette" style="display: none; text-align: center;">
-		<button onclick="selectColor('#000000')">Черный</button>
-		<button onclick="selectColor('#ff0000')">Красный </button>
-		<button onclick="selectColor('#008000')">Зеленый</button>
-		<button onclick="selectColor('#0000ff')">Синий</button>
-		<button onclick="selectColor('#ffff00')">Желтый</button>
-		<button onclick="selectColor('#ff6f00')">Оранжевый</button>
-		<button onclick="selectColor('#8b00ff')">Фиолетовый</button>
-		<button onclick="selectColor('#808080')">Серый</button>
-		<button onclick="selectColor('#ff0099')">Розовый</button>
-		<button onclick="selectColor('#00ffff')">Голубой</button>
-		<button onclick="selectColor('#ffffff')">Белый</button>
-    </div> 
-	
-	<div id ="size" style= "display: none; text-align: center;">
-	<button onclick= "selectSize(3)">3</button>
-	<button onclick= "selectSize(5)">5</button>
-	<button onclick= "selectSize(10)">10</button>
-	<button onclick= "selectSize(20)">20</button>	
-	<button onclick= "selectSize(30)">30</button>
-	<button onclick= "selectSize(50)">50</button>
-	<button onclick= "selectSize(100)">100</button>
+		<div style="height: 30px;"></div>
 	</div>
-	
-    <div style="height: 20px;"></div> 
+ 
     
-    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; background: white; display: block; margin: 0 auto;">
+    <canvas id="canvas" width= '800' height= '600' class= "canvas-style" >
       Версия вашего браузера устарела. Загрузка canvas невозможна
     </canvas>
-    <div style="height: 20px;"></div> 
 	
-	<div style= "text-align: center;">
-	<label >Название файла:<input type="text" id="fileName"></label>
-    <button onclick="saveImage()">Сохранить</button>
+	<div class="center-style">
+
+		<div style="height: 30px;"></div> 
+		
+		<label >Название файла:<input type="text" id="fileName"></label>
+		<button onclick="saveImage()">Сохранить</button>
+		
+		<div style="height: 100px;"></div>
 	</div>
-	<div style="height: 100px;"></div>
 	
-	<script>
-	  
-	  function hideBlock(id){
-		const block= document.getElementById(id);
-		if(block.style.display === 'none'){
-			block.style.display = 'block';
-		}
-		else{
-			block.style.display = 'none';
-		}
-	  }
-	  
-
-	
-      function selectColor(color){
-        const canvas= document.getElementById('canvas');
-        const context= canvas.getContext('2d');
-        context.strokeStyle= color;
-        hideBlock('palette');
-        }
-		
-		
-	  function selectSize(lineWidth){
-		const canvas= document.getElementById('canvas');
-        const context= canvas.getContext('2d');
-		context.lineWidth =lineWidth;
-		hideBlock('size');
-	  }
-	
-	
-      function clearCanvas(){
-        const canvas= document.getElementById('canvas');
-        const context= canvas.getContext('2d');
-        context.clearRect(0,0,canvas.width, canvas.height);
-      }	 
-	  function eraser(){
-		const canvas= document.getElementById('canvas');
-        const context= canvas.getContext('2d');
-		context.strokeStyle='#ffffff';
-	  }
-	
-
-      function work_with_canvas(){
-        const element= document.getElementById('canvas');
-        const context= element.getContext('2d');
-        
-        let valueConfiguration=
-        {
-          color: '#000000',
-          lineWidth: 3
-        };
-        
-        //function setValueCanvasLineWidth(newLineWidth){
-          //valueConfiguration.lineWidth= newLineWidth;
-        //}
-
-        context.strokeStyle = valueConfiguration.color;
-        context.lineWidth = valueConfiguration.lineWidth;
-
-        let checkPainting=
-        {
-          isActive: false,
-          startX: 0,
-          startY: 0
-        };
-        function handleMouseDown(event)
-        {
-          checkPainting.isActive= true;
-          checkPainting.startX= event.offsetX;
-          checkPainting.startY= event.offsetY;
-        }
-        function handleMouseUp(event)
-        {
-          if(!checkPainting.isActive)
-          {
-            return;
-          }
-          let endX= event.offsetX;
-          let endY= event.offsetY;
-          drawLine(context, checkPainting.startX, checkPainting.startY, endX, endY);
-          checkPainting.isActive= false;
-        }
-
-        function drawLine(context, startX, startY, endX, endY)
-        {
-          context.beginPath();
-          context.moveTo(startX, startY);
-          context.lineTo(endX, endY);
-          context.stroke();
-        }
-        element.addEventListener('mousedown', handleMouseDown);
-        element.addEventListener('mouseup', handleMouseUp);
-      }
-	  
-	  function saveImage(){
-		const canvas = document.getElementById('canvas');
-		const filenameInput = document.getElementById('fileName');
-		const filename = filenameInput.value || 'мой рисунок';
-		
-		const link = document.createElement('a');
-		link.download= filename + '.png';
-		link.href=canvas.toDataURL();
-		link.click();
-	  }
-
-      work_with_canvas();
-    </script>
-	
-	<footer style="
-	  background-color: #ffcdd2; 
-	  padding: 25px; 
-	  margin-top: 20px; 
-	  text-align: center;
-	  position: fixed;
-	  bottom: 0;
-	  left: 0;
-	  box-sizing: border-box;
-	  width: 100%;
-	  ">
+	<footer class="footer-style">
 	  <a href="https://github.com/Korobokkk" style="margin: 0 15px; color: #555555;">Следи за мной на GitHub</a>
 	</footer>
+	
+	<script src="script.js"></script>
   </body>
 </html>
