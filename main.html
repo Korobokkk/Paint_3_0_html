@@ -3,18 +3,23 @@
   <head>
     <meta charset="uft-8" />
     <title>Рисовашки</title>
+    <style> 
+      body{
+        background-color: #ffffcc;
+      }
+    </style>
   </head>
 
   <body>
     <h1>Рисовашки</h1>
     <p>Здесь вы можете нарисовать <strong>всё</strong> что угодно!</p>
-    <p onclick="text_display('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
+    <p onclick="hideBlock('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
     <div id="help" style="display: none">
       <p>HELP Текст</p>
     </div>
 
-    <button onclick ="paletteVisibility()">Выбор цвета</button>
-	<button onclick ="sizePen()">Размер</button>
+    <button onclick ="hideBlock('palette')">Выбор цвета</button>
+	<button onclick ="hideBlock('size')">Размер</button>
 	<button onclick="clearCanvas()">Новый лист</button>
     <button onclick="eraser()">Ластик</button>
     
@@ -44,54 +49,41 @@
 	
     <div style="height: 20px;"></div> 
     
-    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; ">
+    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; background: white; display: block; margin: 0 auto">
       Версия вашего браузера устарела. Загрузка canvas невозможна
     </canvas>
-    <script>
-      function text_display(id){
-        const element = document.getElementById(id);
-        if( element.style.display === 'none'){
-          element.style.display = 'block';}
-        else{
-          element.style.display = 'none';
-        }
-      }
+    
+	<label>Название файла:<input type="text" id="fileName"></label>
+	
+    <button onclick="saveImage()">Save image</button>
+	
+	<script>
 	  
+	  function hideBlock(id){
+		const block= document.getElementById(id);
+		if(block.style.display === 'none'){
+			block.style.display = 'block';
+		}
+		else{
+			block.style.display = 'none';
+		}
+	  }
 	  
 
-      function paletteVisibility()
-      {
-        const palette = document.getElementById('palette');
-        if (palette.style.display==='none'){
-          palette.style.display = 'block';
-        }
-        else{
-          palette.style.display = 'none';
-        }
-      }
+	
       function selectColor(color){
         const canvas= document.getElementById('canvas');
         const context= canvas.getContext('2d');
         context.strokeStyle= color;
-        paletteVisibility();
+        hideBlock('palette');
         }
 		
 		
-	  function sizePen(){
-		const  size= document.getElementById('size');
-		if(size.style.display==='none')
-		{
-			size.style.display='block';
-		}
-		else{
-			size.style.display='none';
-		}
-	  }
 	  function selectSize(lineWidth){
 		const canvas= document.getElementById('canvas');
         const context= canvas.getContext('2d');
 		context.lineWidth =lineWidth;
-		sizePen();
+		hideBlock('size');
 	  }
 	
 	
@@ -158,6 +150,17 @@
         element.addEventListener('mousedown', handleMouseDown);
         element.addEventListener('mouseup', handleMouseUp);
       }
+	  
+	  function saveImage(){
+		const canvas = document.getElementById('canvas');
+		const filenameInput = document.getElementById('fileName');
+		const filename = filenameInput.value || 'мой рисунок';
+		
+		const link = document.createElement('a');
+		link.download= filename + '.png';
+		link.href=canvas.toDataURL();
+		link.click();
+	  }
 
       work_with_canvas();
     </script>
