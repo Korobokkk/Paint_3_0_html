@@ -11,19 +11,22 @@
   </head>
 
   <body>
-    <h1>Рисовашки</h1>
-    <p>Здесь вы можете нарисовать <strong>всё</strong> что угодно!</p>
-    <p onclick="hideBlock('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
+    <h1 style= "font-size: 70px; text-align: center;">Рисовашки</h1>
+    <p style= "font-size: 30px; text-align: center;">Здесь вы можете нарисовать <strong>всё</strong> что угодно!</p>
+    <p style= "font-size: 25px; text-align: center;" onclick="hideBlock('help')">Если вам нужна помощь, <ins>нажмите сюда</ins></p>
     <div id="help" style="display: none">
-      <p>HELP Текст</p>
+	  <p style= "font-size: 20px; text-align: center;">Вы можете рисовать <strong>разными цветами</strong>, <strong>менять размер кисти</strong>, а также <strong>сохранять изображение</strong>, для этого достаточно нажать на кнопку с соответствующим названием.</p> 
+      <p style= "font-size: 20px; text-align: center;"><strong>Если поле для рисования слишком большое и не помещается в экран</strong>- рекомендуется использовать масштабирование страницы</p>
     </div>
 
+	<div style= "text-align: center;">
     <button onclick ="hideBlock('palette')">Выбор цвета</button>
 	<button onclick ="hideBlock('size')">Размер</button>
 	<button onclick="clearCanvas()">Новый лист</button>
     <button onclick="eraser()">Ластик</button>
-    
-    <div id="palette" style="display: none;">
+    </div>
+	
+    <div id="palette" style="display: none; text-align: center;">
 		<button onclick="selectColor('#000000')">Черный</button>
 		<button onclick="selectColor('#ff0000')">Красный </button>
 		<button onclick="selectColor('#008000')">Зеленый</button>
@@ -37,7 +40,7 @@
 		<button onclick="selectColor('#ffffff')">Белый</button>
     </div> 
 	
-	<div id ="size" style= "display: none;">
+	<div id ="size" style= "display: none; text-align: center;">
 	<button onclick= "selectSize(3)">3</button>
 	<button onclick= "selectSize(5)">5</button>
 	<button onclick= "selectSize(10)">10</button>
@@ -49,13 +52,16 @@
 	
     <div style="height: 20px;"></div> 
     
-    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; background: white; display: block; margin: 0 auto">
+    <canvas id="canvas" width= '800' height= '600' style="border: 5px solid black; background: white; display: block; margin: 0 auto;">
       Версия вашего браузера устарела. Загрузка canvas невозможна
     </canvas>
-    
-	<label>Название файла:<input type="text" id="fileName"></label>
+    <div style="height: 20px;"></div> 
 	
-    <button onclick="saveImage()">Save image</button>
+	<div style= "text-align: center;">
+	<label >Название файла:<input type="text" id="fileName"></label>
+    <button onclick="saveImage()">Сохранить</button>
+	</div>
+	<div style="height: 100px;"></div>
 	
 	<script>
 	  
@@ -164,5 +170,19 @@
 
       work_with_canvas();
     </script>
+	
+	<footer style="
+	  background-color: #ffcdd2; 
+	  padding: 25px; 
+	  margin-top: 20px; 
+	  text-align: center;
+	  position: fixed;
+	  bottom: 0;
+	  left: 0;
+	  box-sizing: border-box;
+	  width: 100%;
+	  ">
+	  <a href="https://github.com/Korobokkk" style="margin: 0 15px; color: #555555;">Следи за мной на GitHub</a>
+	</footer>
   </body>
 </html>
