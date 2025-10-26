@@ -1,3 +1,5 @@
+let drawingMode = 'straingLine';
+
 function hideBlock(id) {
     const block = document.getElementById(id);
     if (block.style.display === 'none') {
@@ -16,15 +18,12 @@ function selectColor(color) {
     context.strokeStyle = color;
     hideBlock('palette');
 }
-
-
 function selectSize(lineWidth) {
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
     context.lineWidth = lineWidth;
     hideBlock('size');
 }
-
 
 function clearCanvas() {
     const canvas = document.getElementById('canvas');
@@ -35,6 +34,10 @@ function eraser() {
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
     context.strokeStyle = '#ffffff';
+}
+
+function selectDrawMode(newStyle){
+    drawingMode = newStyle;
 }
 
 
@@ -62,31 +65,46 @@ function work_with_canvas() {
         checkPainting.isActive = true;
         checkPainting.startX = event.offsetX;
         checkPainting.startY = event.offsetY;
+        
+        context.beginPath();
+        context.moveTo(checkPainting.startX, checkPainting.startY);
     }
+    
+    function handleMouseMove(event){
+        if(!checkPainting.isActive){
+            return;
+        }
+        if(drawingMode=='freeLine'){
+            context.lineTo(event.offsetX, event.offsetY);
+            context.stroke();
+        }    
+    }
+    
     function handleMouseUp(event) {
         if (!checkPainting.isActive) {
             return;
         }
-        let endX = event.offsetX;
-        let endY = event.offsetY;
-        drawLine(context, checkPainting.startX, checkPainting.startY, endX, endY);
+        if(drawingMode=='straingLine'){
+            let endX = event.offsetX;
+            let endY = event.offsetY;
+            drawLine(context, checkPainting.startX, checkPainting.startY, endX, endY);
+        }
         checkPainting.isActive = false;
     }
 
     function drawLine(context, startX, startY, endX, endY) {
-        context.beginPath();
-        context.moveTo(startX, startY);
         context.lineTo(endX, endY);
         context.stroke();
     }
     element.addEventListener('mousedown', handleMouseDown);
     element.addEventListener('mouseup', handleMouseUp);
+    element.addEventListener('mousemove', handleMouseMove);
 }
 
 function saveImage() {
     const canvas = document.getElementById('canvas');
     const filenameInput = document.getElementById('fileName');
-    const filename = filenameInput.value || 'мой рисунок';
+    const filename = filenameInput.value || 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ';
 
     const link = document.createElement('a');
     link.download = filename + '.png';
