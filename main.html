@@ -20,10 +20,10 @@
 		
 		<button onclick ="hideBlock('palette')">Выбор цвета</button>
 		<button onclick ="hideBlock('size')">Размер</button>
-		<button onclick ="hideBlock('drowMode')">Режим рисования</button>
-		
-		<button onclick="clearCanvas()">Новый лист</button>
+		<button onclick ="hideBlock('drawMode')">Режим рисования</button>
+		<button onclick="hideBlock('canvasSize')">Размер Окна</button>
 		<button onclick="eraser()">Ластик</button>
+		<button onclick="clearCanvas()">Новый лист</button>
 	
 		<div id="palette" style="display: none;">
 			<button onclick="selectColor('#000000')">Черный</button>
@@ -49,9 +49,15 @@
 		<button onclick= "selectSize(100)">100</button>
 		</div>	
 
-		<div id="drowMode" style= "display: none">
+		<div id="drawMode" style= "display: none">
 			<button onclick="selectDrawMode('freeLine')">Свободный стиль</button>
 			<button onclick="selectDrawMode('straingLine')">Прямая линия</button>
+		</div>
+		
+		<div id ="canvasSize" style="display: none">
+			<button onclick="selectCanvasSize(1200, 900)">Large 1200x900</button>
+			<button onclick="selectCanvasSize(800, 600)">Standart 800x600</button>
+			<button onclick="selectCanvasSize(600, 450)">Small 600x450</button>	
 		</div>
 		
 		<div style="height: 30px;"></div>

@@ -38,6 +38,7 @@ function eraser() {
 
 function selectDrawMode(newStyle){
     drawingMode = newStyle;
+    hideBlock('drawMode');
 }
 
 
@@ -104,12 +105,21 @@ function work_with_canvas() {
 function saveImage() {
     const canvas = document.getElementById('canvas');
     const filenameInput = document.getElementById('fileName');
-    const filename = filenameInput.value || '��� �������';
+    const filename = filenameInput.value || 'Мой рисунок';
 
     const link = document.createElement('a');
     link.download = filename + '.png';
     link.href = canvas.toDataURL();
     link.click();
+}
+
+function selectCanvasSize(x, y){
+    const canvas = document.getElementById('canvas');
+    const context= canvas.getContext('2d');
+    canvas.width=x;
+    canvas.height=y;
+    
+    hideBlock('canvasSize');
 }
 
 work_with_canvas();
